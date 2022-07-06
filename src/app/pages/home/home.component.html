@@ -1,0 +1,47 @@
+<div class="container">
+
+  <loader *ngIf="isLoading">
+
+  </loader>
+
+  <div *ngIf="games.length > 0" class="banner-container">
+
+    <div class="banner-content">
+      <button (click)="previousImage()" class="button-left" type="button">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+
+      <img [src]="cover.length > 0 ?  cover[indexCover] : '' " />
+
+      <button (click)="nextImage()" class="button-right" type="button">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+
+    <div class="bullet-container">
+      <span [ngClass]="{'selected' : indexCover === 0}"></span>
+      <span [ngClass]="{'selected' : indexCover === 1}"></span>
+      <span [ngClass]="{'selected' : indexCover === 2}"></span>
+    </div>
+  </div>
+
+  <div class="list-games" *ngIf="games.length > 0">
+
+    <card-game
+      *ngFor="let game of games"
+      [image]="game.photos.length > 0 ? game.photos[0].url : semImagem"
+      [price]="game.mediumPrice || 0"
+      [rate]="game.rating"
+      [title]="game.title"
+    >
+    </card-game>
+
+  </div>
+
+  <button *ngIf="games.length > 0" class="view-more" type="button" > VIEW MORE PRODUCTS</button>
+</div>
+
+<div *ngIf="games.length === 0 && !isLoading" class="empty-container">
+  <h1>Ops! Não encontramos nenhum game!</h1>
+</div>
